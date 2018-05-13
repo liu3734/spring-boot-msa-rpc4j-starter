@@ -1,0 +1,1 @@
+# spring-boot-msa-rpc4j-starter
