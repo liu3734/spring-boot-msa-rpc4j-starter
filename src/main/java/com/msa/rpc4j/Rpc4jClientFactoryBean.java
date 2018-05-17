@@ -1,5 +1,6 @@
 package com.msa.rpc4j;
 
+import lombok.Data;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -13,8 +14,11 @@ import org.springframework.context.ApplicationContextAware;
  * @Date: 16:52 2018/5/17
  * @Version: 1.0.0
  */
+@Data
 public class Rpc4jClientFactoryBean implements FactoryBean<Object>, InitializingBean,
         ApplicationContextAware {
+
+    private String serviceId;
 
     @Override
     public Object getObject() throws Exception {
