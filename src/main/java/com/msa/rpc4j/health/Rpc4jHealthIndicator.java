@@ -1,6 +1,6 @@
 package com.msa.rpc4j.health;
 
-import com.msa.rpc4j.Rpc4jServerProperties;
+import com.msa.rpc4j.autoconfig.Rpc4jServerProperties;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 

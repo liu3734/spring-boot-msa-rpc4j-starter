@@ -1,5 +1,6 @@
-package com.msa.rpc4j;
+package com.msa.rpc4j.annotation;
 
+import com.msa.rpc4j.autoconfig.Rpc4jClientAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

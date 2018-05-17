@@ -1,4 +1,4 @@
-package com.msa.rpc4j;
+package com.msa.rpc4j.autoconfig;
 
 import com.msa.api.regcovery.registry.ServiceRegistry;
 import com.msa.rpc.server.RpcServer;

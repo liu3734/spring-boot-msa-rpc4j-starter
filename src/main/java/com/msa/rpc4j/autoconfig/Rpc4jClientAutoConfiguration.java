@@ -1,4 +1,4 @@
-package com.msa.rpc4j;
+package com.msa.rpc4j.autoconfig;
 
 import com.msa.api.regcovery.discovery.ServiceDiscovery;
 import com.msa.api.regcovery.discovery.ZkServiceDiscovery;
