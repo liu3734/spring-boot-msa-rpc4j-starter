@@ -111,7 +111,7 @@ public class Rpc4jClientsRegistrar implements ImportBeanDefinitionRegistrar,
                     AnnotatedBeanDefinition beanDefinition = (AnnotatedBeanDefinition) candidateComponent;
                     AnnotationMetadata annotationMetadata = beanDefinition.getMetadata();
                     Assert.isTrue(annotationMetadata.isInterface(),
-                            "@Rpc4jClient注解的类必须是接口");
+                            "@Rpc4jClient class must be a interface");
                     Map<String, Object> attributes = annotationMetadata
                             .getAnnotationAttributes(
                                     Rpc4jClient.class.getCanonicalName());
@@ -130,13 +130,28 @@ public class Rpc4jClientsRegistrar implements ImportBeanDefinitionRegistrar,
      */
     private void registerRpc4jClient(BeanDefinitionRegistry registry,
                                      AnnotationMetadata annotationMetadata, Map<String, Object> attributes) {
-        String clazzName = annotationMetadata.getClassName();
+        String beanName = annotationMetadata.getClassName();
+        Class rpc4jClientClazz;
+        try {
+            rpc4jClientClazz = this.resourceLoader.getClassLoader().loadClass(beanName);
+        } catch (ClassNotFoundException e) {
+            throw new IllegalArgumentException(annotationMetadata.getClassName() + " in classpath not find");
+        }
+        Class<?>[] classes = rpc4jClientClazz.getInterfaces();
+        if (Objects.nonNull(classes)) {
+            if (classes.length > 1) {
+                throw new IllegalArgumentException(rpc4jClientClazz.getName() + " more than 1 interfaces");
+            }
+            rpc4jClientClazz = classes[0];
+        }
+        String target = rpc4jClientClazz.getName();
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(Rpc4jClientFactoryBean.class);
-        builder.addPropertyValue("serviceId", getAttrVal("name", attributes));
-        builder.addPropertyValue("type", clazzName);
-        registry.registerBeanDefinition(clazzName, builder.getBeanDefinition());
+        builder.addPropertyValue("type", beanName);
+        builder.addPropertyValue("target", target);
+        registry.registerBeanDefinition(beanName, builder.getBeanDefinition());
     }
 
+    @Deprecated
     private Object getAttrVal(String attrName, Map<String, Object> attributes) {
         return attributes.get(attrName);
     }

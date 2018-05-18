@@ -26,9 +26,9 @@ public class Rpc4jClientFactoryBean implements FactoryBean<Object>, Initializing
      */
     private Class<?> type;
     /**
-     * The Service id.
+     * The Target.
      */
-    private String serviceId;
+    private Class<?> target;
     /**
      * The Application context.
      */
@@ -47,7 +47,7 @@ public class Rpc4jClientFactoryBean implements FactoryBean<Object>, Initializing
     @Override
     public Object getObject() throws Exception {
         // 动态代理生成bean
-        return rpcClient.newInstance(type);
+        return rpcClient.newInstance(type, target);
     }
 
     /**
@@ -77,7 +77,8 @@ public class Rpc4jClientFactoryBean implements FactoryBean<Object>, Initializing
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        Assert.hasText(serviceId, "serviceId must required!");
+        Assert.notNull(this.type, "type must be required");
+        Assert.notNull(this.target, "target must be required");
         rpcClient = applicationContext.getBean(RpcClient.class);
     }
 

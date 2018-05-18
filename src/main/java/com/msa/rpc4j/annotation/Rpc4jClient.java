@@ -1,7 +1,5 @@
 package com.msa.rpc4j.annotation;
 
-import org.springframework.core.annotation.AliasFor;
-
 import java.lang.annotation.*;
 
 /**
@@ -17,20 +15,4 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 public @interface Rpc4jClient {
-    /**
-     * Value string.
-     *
-     * @return the string
-     */
-    @AliasFor("name")
-    String value() default "";
-
-    /**
-     * 服务名
-     * Name string.
-     *
-     * @return the string
-     */
-    @AliasFor("value")
-    String name() default "";
 }
