@@ -1,6 +1,7 @@
 package com.msa.rpc4j.annotation;
 
 import com.msa.rpc4j.Rpc4jClientsRegistrar;
+import com.msa.rpc4j.autoconfig.Rpc4jClientAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -17,7 +18,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import(Rpc4jClientsRegistrar.class)
+@Import({Rpc4jClientsRegistrar.class, Rpc4jClientAutoConfiguration.class})
 public @interface EnableRpc4jClients {
 
     /**
