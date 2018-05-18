@@ -19,7 +19,7 @@ public class Rpc4jServerProperties {
      * 服务端端口号
      * The Port.
      */
-    private int port = 121210;
+    private int port = 8025;
 
     /**
      * 服务注册中心地址
