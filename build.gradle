@@ -2,6 +2,7 @@ group 'com.msa.spring.boot'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: "maven"
 
 sourceCompatibility = 1.8
 
@@ -21,4 +22,19 @@ dependencies {
             'org.springframework.boot:spring-boot-configuration-processor:1.5.10.RELEASE',
             'org.springframework.boot:spring-boot-starter-actuator:1.5.10.RELEASE'
     )
+}
+
+def localMavenRepo = 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: localMavenRepo)
+            pom.project {
+                name = project.name
+                packaging = 'jar'
+                description = 'description'
+            }
+        }
+    }
 }

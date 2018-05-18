@@ -1,47 +1,94 @@
 package com.msa.rpc4j;
 
+import com.msa.rpc.client.RpcClient;
 import lombok.Data;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.util.Assert;
 
 /**
+ * The type Rpc 4 j client factory bean.
+ *
  * @ClassName: Rpc4jClientFactoryBean
  * @Description: rpc4j client工厂类
  * @Author: sxp
- * @Date: 16:52 2018/5/17
+ * @Date: 16 :52 2018/5/17
  * @Version: 1.0.0
  */
 @Data
 public class Rpc4jClientFactoryBean implements FactoryBean<Object>, InitializingBean,
         ApplicationContextAware {
-
+    /**
+     * The Type.
+     */
+    private Class<?> type;
+    /**
+     * The Service id.
+     */
     private String serviceId;
+    /**
+     * The Application context.
+     */
+    private ApplicationContext applicationContext;
+    /**
+     * The Rpc client.
+     */
+    private RpcClient rpcClient;
 
+    /**
+     * Gets object.
+     *
+     * @return the object
+     * @throws Exception the exception
+     */
     @Override
     public Object getObject() throws Exception {
-        return null;
+        // 动态代理生成bean
+        return rpcClient.newInstance(type);
     }
 
+    /**
+     * Gets object type.
+     *
+     * @return the object type
+     */
     @Override
     public Class<?> getObjectType() {
-        return null;
+        return this.type;
     }
 
+    /**
+     * Is singleton boolean.
+     *
+     * @return the boolean
+     */
     @Override
     public boolean isSingleton() {
-        return false;
+        return true;
     }
 
+    /**
+     * After properties set.
+     *
+     * @throws Exception the exception
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
-
+        Assert.hasText(serviceId, "serviceId must required!");
+        rpcClient = applicationContext.getBean(RpcClient.class);
     }
 
+    /**
+     * Sets application context.
+     *
+     * @param applicationContext the application context
+     * @throws BeansException the beans exception
+     */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-
+        this.applicationContext = applicationContext;
     }
 }

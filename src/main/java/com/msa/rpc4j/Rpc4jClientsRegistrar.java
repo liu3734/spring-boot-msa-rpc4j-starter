@@ -130,10 +130,11 @@ public class Rpc4jClientsRegistrar implements ImportBeanDefinitionRegistrar,
      */
     private void registerRpc4jClient(BeanDefinitionRegistry registry,
                                      AnnotationMetadata annotationMetadata, Map<String, Object> attributes) {
+        String clazzName = annotationMetadata.getClassName();
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(Rpc4jClientFactoryBean.class);
         builder.addPropertyValue("serviceId", getAttrVal("name", attributes));
-        String beanName = annotationMetadata.getClassName();
-        registry.registerBeanDefinition(beanName, builder.getBeanDefinition());
+        builder.addPropertyValue("type", clazzName);
+        registry.registerBeanDefinition(clazzName, builder.getBeanDefinition());
     }
 
     private Object getAttrVal(String attrName, Map<String, Object> attributes) {
