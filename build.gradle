@@ -1,4 +1,4 @@
-group 'com.msa.spring.boot'
+group 'com.github.msa'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly group: 'com.msa', name: 'msa-rpc-client', version: '1.0-SNAPSHOT'
-    compileOnly group: 'com.msa', name: 'msa-rpc-server', version: '1.0-SNAPSHOT'
+    compileOnly group: 'com.github.msa', name: 'msa-rpc-client', version: '1.0-SNAPSHOT'
+    compileOnly group: 'com.github.msa', name: 'msa-rpc-server', version: '1.0-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
     compileOnly(
