@@ -11,12 +11,6 @@ import org.springframework.util.Assert;
 
 /**
  * The type Rpc 4 j client factory bean.
- *
- * @ClassName: Rpc4jClientFactoryBean
- * @Description: rpc4j client工厂类
- * @Author: sxp
- * @Date: 16 :52 2018/5/17
- * @Version: 1.0.0
  */
 @Data
 public class Rpc4jClientFactoryBean implements FactoryBean<Object>, InitializingBean,
@@ -46,7 +40,6 @@ public class Rpc4jClientFactoryBean implements FactoryBean<Object>, Initializing
      */
     @Override
     public Object getObject() throws Exception {
-        // 动态代理生成bean
         return rpcClient.newInstance(type, target);
     }
 

@@ -5,12 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * The type Rpc 4 j server properties.
- *
- * @ClassName: Rpc4jServerProperties
- * @Description: rpc框架服务端属性
- * @Author: sxp
- * @Date: 10 :37 2018/5/2
- * @Version: 1.0.0
  */
 @Data
 @ConfigurationProperties(prefix = "spring.rpc.server")

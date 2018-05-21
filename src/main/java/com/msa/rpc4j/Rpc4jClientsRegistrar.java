@@ -27,12 +27,6 @@ import java.util.Set;
 
 /**
  * The type Rpc 4 j clients registrar.
- *
- * @ClassName: Rpc4jClientsRegistrar
- * @Description: rpc4j客户端注册类
- * @Author: sxp
- * @Date: 15 :53 2018/5/17
- * @Version: 1.0.0
  */
 public class Rpc4jClientsRegistrar implements ImportBeanDefinitionRegistrar,
         ResourceLoaderAware, BeanClassLoaderAware, EnvironmentAware {
@@ -151,6 +145,13 @@ public class Rpc4jClientsRegistrar implements ImportBeanDefinitionRegistrar,
         registry.registerBeanDefinition(beanName, builder.getBeanDefinition());
     }
 
+    /**
+     * Gets attr val.
+     *
+     * @param attrName   the attr name
+     * @param attributes the attributes
+     * @return the attr val
+     */
     @Deprecated
     private Object getAttrVal(String attrName, Map<String, Object> attributes) {
         return attributes.get(attrName);

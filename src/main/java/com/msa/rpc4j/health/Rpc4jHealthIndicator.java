@@ -8,12 +8,6 @@ import java.net.InetAddress;
 
 /**
  * The type Rpc 4 j health indicator.
- *
- * @ClassName: Rpc4jHealthIndicator
- * @Description: rpc框架服务端心跳检测
- * @Author: sxp
- * @Date: 17 :03 2018/5/2
- * @Version: 1.0.0
  */
 public class Rpc4jHealthIndicator extends AbstractHealthIndicator {
 
@@ -32,10 +26,10 @@ public class Rpc4jHealthIndicator extends AbstractHealthIndicator {
     }
 
     /**
-     * Actual health check logic.
+     * Do health check.
      *
-     * @param builder the {@link Builder} to report health status and details
-     * @throws Exception any {@link Exception} that should create a {@link Status#DOWN}                   system status.
+     * @param builder the builder
+     * @throws Exception the exception
      */
     @Override
     protected void doHealthCheck(Health.Builder builder) throws Exception {

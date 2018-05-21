@@ -10,12 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * The type Rpc 4 j server auto configuration.
- *
- * @ClassName: Rpc4jServerAutoConfiguration
- * @Description: rpc4j框架服务端自动配置
- * @Author: sxp
- * @Date: 11 :28 2018/5/2
- * @Version: 1.0.0
  */
 @Configuration
 @EnableConfigurationProperties(Rpc4jServerProperties.class)
