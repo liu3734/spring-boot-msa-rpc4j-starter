@@ -23,9 +23,7 @@ public class Rpc4jClientAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public RpcClient client(ServiceDiscovery discovery) {
-        RpcClient client = new RpcClient();
-        client.setServiceDiscovery(discovery);
-        return client;
+        return new RpcClient(discovery);
     }
 
     /**
