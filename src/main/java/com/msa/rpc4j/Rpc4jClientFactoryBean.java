@@ -1,6 +1,8 @@
 package com.msa.rpc4j;
 
 import com.msa.rpc.client.RpcClient;
+import com.msa.rpc.client.support.DefaultInvocationProxy;
+import com.msa.rpc.client.support.RpcClientFactory;
 import lombok.Data;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
@@ -8,8 +10,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.Assert;
-import com.msa.rpc.client.support.InvocationProxy;
-import com.msa.rpc.client.support.DefaultInvocationProxy;
+
 
 /**
  * The type Rpc 4 j client factory bean.
@@ -33,11 +34,10 @@ public class Rpc4jClientFactoryBean implements FactoryBean<Object>, Initializing
      * The Rpc client.
      */
     private RpcClient rpcClient;
-
     /**
-     * The Proxy.
+     * factory
      */
-    private InvocationProxy proxy;
+    private RpcClientFactory factory;
 
     /**
      * Gets object.
@@ -47,7 +47,7 @@ public class Rpc4jClientFactoryBean implements FactoryBean<Object>, Initializing
      */
     @Override
     public Object getObject() throws Exception {
-        return proxy.newInstance(type, target);
+        return factory.newClient(type, target);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Rpc4jClientFactoryBean implements FactoryBean<Object>, Initializing
         Assert.notNull(this.type, "type must be required");
         Assert.notNull(this.target, "target must be required");
         rpcClient = applicationContext.getBean(RpcClient.class);
-        proxy = new DefaultInvocationProxy(rpcClient);
+        factory = new RpcClientFactory(new DefaultInvocationProxy(rpcClient));
     }
 
     /**
